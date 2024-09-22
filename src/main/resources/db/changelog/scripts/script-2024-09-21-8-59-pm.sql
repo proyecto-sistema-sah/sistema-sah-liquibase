@@ -1,7 +1,3 @@
 --Se cambia tamaño de campo
 ALTER TABLE sah.usuario
-ALTER COLUMN contrasena TYPE VARCHAR(60);
-
-
-
-
+ALTER COLUMN codigo_usuario TYPE VARCHAR(7);
