@@ -23,7 +23,7 @@ CREATE TABLE sah.tipo_alimento (
 
 -- Tabla de alimento
 CREATE TABLE sah.alimento (
-                              codigo_alimento CHAR(5) PRIMARY KEY,
+                              codigo_alimento CHAR(7) PRIMARY KEY,
                               tiempo_preparacion_alimento TIME NOT NULL,
                               nombre_alimento VARCHAR(30) NOT NULL,
                               detalle_alimento TEXT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE sah.tipo_usuario (
 
 -- Tabla de usuario
 CREATE TABLE sah.usuario (
-                             codigo_usuario CHAR(5) PRIMARY KEY,
+                             codigo_usuario CHAR(7) PRIMARY KEY,
                              nombres_usuario VARCHAR(80) NOT NULL,
                              apellidos_usuario VARCHAR(80) NOT NULL,
                              correo_usuario VARCHAR(50) NOT NULL UNIQUE,
@@ -51,8 +51,8 @@ CREATE TABLE sah.usuario (
 
 -- Tabla de usuario_alimento con clave primaria compuesta
 CREATE TABLE sah.usuario_alimento (
-                                      codigo_usuario_fk VARCHAR(5) NOT NULL,
-                                      codigo_alimento_fk VARCHAR(5) NOT NULL,
+                                      codigo_usuario_fk VARCHAR(7) NOT NULL,
+                                      codigo_alimento_fk VARCHAR(7) NOT NULL,
                                       estado_usuario_alimento_fk INT NOT NULL,
                                       PRIMARY KEY (codigo_usuario_fk, codigo_alimento_fk),
                                       FOREIGN KEY (codigo_usuario_fk) REFERENCES sah.usuario(codigo_usuario) ON DELETE CASCADE,
@@ -68,7 +68,7 @@ CREATE TABLE sah.tipo_servicio (
 
 -- Tabla de servicio
 CREATE TABLE sah.servicio (
-                              codigo_servicio CHAR(5) PRIMARY KEY,
+                              codigo_servicio CHAR(7) PRIMARY KEY,
                               nombre_servicio VARCHAR(50) NOT NULL,
                               valor_servicio NUMERIC(10,2) NOT null check(valor_servicio > 0),
                               codigo_imagen_servicio TEXT NOT NULL,
@@ -85,8 +85,8 @@ CREATE TABLE sah.estado_usuario_servicio (
 
 -- Tabla de usuario_servicio con clave primaria compuesta
 CREATE TABLE sah.usuario_servicio (
-                                      codigo_servicio_fk VARCHAR(5) NOT NULL,
-                                      codigo_usuario_fk VARCHAR(5) NOT NULL,
+                                      codigo_servicio_fk VARCHAR(7) NOT NULL,
+                                      codigo_usuario_fk VARCHAR(7) NOT NULL,
                                       estado_usuario_servicio_fk INT NOT NULL,
                                       PRIMARY KEY (codigo_servicio_fk, codigo_usuario_fk),
                                       FOREIGN KEY (codigo_servicio_fk) REFERENCES sah.servicio(codigo_servicio),
@@ -108,8 +108,8 @@ CREATE TABLE sah.tipo_cuarto (
 
 -- Tabla de cuarto
 CREATE TABLE sah.cuarto (
-                            codigo_cuarto VARCHAR(5) PRIMARY KEY,
-                            numero_cuarto VARCHAR(5) NOT NULL,
+                            codigo_cuarto VARCHAR(7) PRIMARY KEY,
+                            numero_cuarto VARCHAR(7) NOT NULL,
                             codigo_imagen_cuarto TEXT NOT NULL,
                             valor_noche_cuarto NUMERIC(10,2) NOT null check(valor_noche_cuarto > 0),
                             detalle_cuarto TEXT NULL,
@@ -127,8 +127,8 @@ CREATE TABLE sah.estado_cuarto_servicio (
 
 -- Tabla de cuarto_servicio con clave primaria compuesta
 CREATE TABLE sah.cuarto_servicio (
-                                     codigo_cuarto_fk VARCHAR(5) NOT NULL,
-                                     codigo_servicio_fk VARCHAR(5) NOT NULL,
+                                     codigo_cuarto_fk VARCHAR(7) NOT NULL,
+                                     codigo_servicio_fk VARCHAR(7) NOT NULL,
                                      estado_cuarto_servicio_fk INT NOT NULL,
                                      PRIMARY KEY (codigo_cuarto_fk, codigo_servicio_fk),
                                      FOREIGN KEY (codigo_cuarto_fk) REFERENCES sah.cuarto(codigo_cuarto),
@@ -144,13 +144,13 @@ CREATE TABLE sah.estado_reserva (
 
 -- Tabla de reserva con restricción CHECK y corrección de clave foránea
 CREATE TABLE sah.reserva (
-                             codigo_reserva VARCHAR(5) PRIMARY KEY,
-                             fecha_inicio_reserva TIMESTAMPTZ NOT NULL CHECK (fecha_inicio_reserva < fecha_fin_reserva),
-                             fecha_fin_reserva TIMESTAMPTZ NOT null check(fecha_fin_reserva > fecha_inicio_reserva),
+                             codigo_reserva VARCHAR(7) PRIMARY KEY,
+                             fecha_inicio_reserva DATE NOT NULL CHECK (fecha_inicio_reserva < fecha_fin_reserva),
+                             fecha_fin_reserva DATE NOT null check(fecha_fin_reserva > fecha_inicio_reserva),
                              fecha_creacion_reserva TIMESTAMPTZ NOT NULL,
                              fecha_actualizacion_reserva TIMESTAMPTZ NOT NULL,
                              valor_total_reserva NUMERIC(10, 2) NOT null check(valor_total_reserva > 0),
-                             codigo_usuario_fk VARCHAR(5) NOT NULL,
+                             codigo_usuario_fk VARCHAR(7) NOT NULL,
                              estado_reserva_fk INT NOT NULL,
                              FOREIGN KEY (codigo_usuario_fk) REFERENCES sah.usuario(codigo_usuario),
                              FOREIGN KEY (estado_reserva_fk) REFERENCES sah.estado_reserva(id_estado_reserva)
@@ -161,8 +161,8 @@ CREATE TABLE sah.reserva (
 CREATE TABLE sah.facturacion (
                                  codigo_facturacion VARCHAR(10) PRIMARY KEY,
                                  fecha_creacion_facturacion TIMESTAMPTZ NOT NULL,
-                                 codigo_reserva_fk VARCHAR(5) NOT NULL,
-                                 codigo_usuario_fk VARCHAR(5) NOT NULL,
+                                 codigo_reserva_fk VARCHAR(7) NOT NULL,
+                                 codigo_usuario_fk VARCHAR(7) NOT NULL,
                                  estado_facturacion estado_facturacion_enum NOT NULL DEFAULT 'PENDIENTE',
                                  FOREIGN KEY (codigo_reserva_fk) REFERENCES sah.reserva(codigo_reserva),
                                  FOREIGN KEY (codigo_usuario_fk) REFERENCES sah.usuario(codigo_usuario)
@@ -170,8 +170,8 @@ CREATE TABLE sah.facturacion (
 
 -- Tabla de reserva_cuarto con clave primaria compuesta
 CREATE TABLE sah.reserva_cuarto (
-                                    codigo_reserva_fk VARCHAR(5) NOT NULL,
-                                    codigo_cuarto_fk VARCHAR(5) NOT NULL,
+                                    codigo_reserva_fk VARCHAR(7) NOT NULL,
+                                    codigo_cuarto_fk VARCHAR(7) NOT NULL,
                                     PRIMARY KEY (codigo_reserva_fk, codigo_cuarto_fk),
                                     FOREIGN KEY (codigo_reserva_fk) REFERENCES sah.reserva(codigo_reserva),
                                     FOREIGN KEY (codigo_cuarto_fk) REFERENCES sah.cuarto(codigo_cuarto)
