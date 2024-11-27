@@ -163,7 +163,8 @@ CREATE TABLE sah.facturacion (
                                  fecha_creacion_facturacion TIMESTAMPTZ NOT NULL,
                                  codigo_reserva_fk VARCHAR(7) NOT NULL,
                                  codigo_usuario_fk VARCHAR(7) NOT NULL,
-                                 estado_facturacion estado_facturacion_enum NOT NULL DEFAULT 'PENDIENTE',
+                                 url_pdf VARCHAR(200) NOT NULL,
+                                 estado_facturacion varchar(30) NOT NULL,
                                  FOREIGN KEY (codigo_reserva_fk) REFERENCES sah.reserva(codigo_reserva),
                                  FOREIGN KEY (codigo_usuario_fk) REFERENCES sah.usuario(codigo_usuario)
 );
