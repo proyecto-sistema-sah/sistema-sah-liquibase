@@ -139,7 +139,7 @@ CREATE TABLE sah.cuarto_servicio (
 -- Tabla de estado_reserva
 CREATE TABLE sah.estado_reserva (
                                     id_estado_reserva SERIAL PRIMARY KEY,
-                                    nombre_estado_reserva estado_reserva_enum NOT null default 'PENDIENTE'
+                                    nombre_estado_reserva varchar(30) NOT null default 'PENDIENTE'
 );
 
 -- Tabla de reserva con restricción CHECK y corrección de clave foránea
