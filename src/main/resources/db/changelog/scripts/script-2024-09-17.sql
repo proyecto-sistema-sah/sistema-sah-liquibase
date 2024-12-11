@@ -54,7 +54,6 @@ CREATE TABLE sah.usuario_alimento (
                                       codigo_usuario_fk VARCHAR(7) NOT NULL,
                                       codigo_alimento_fk VARCHAR(7) NOT NULL,
                                       estado_usuario_alimento_fk INT NOT NULL,
-                                      PRIMARY KEY (codigo_usuario_fk, codigo_alimento_fk),
                                       FOREIGN KEY (codigo_usuario_fk) REFERENCES sah.usuario(codigo_usuario) ON DELETE CASCADE,
                                       FOREIGN KEY (codigo_alimento_fk) REFERENCES sah.alimento(codigo_alimento),
                                       FOREIGN KEY (estado_usuario_alimento_fk) REFERENCES sah.estado_usuario_alimento(id_estado_usuario_alimento)
@@ -88,7 +87,6 @@ CREATE TABLE sah.usuario_servicio (
                                       codigo_servicio_fk VARCHAR(7) NOT NULL,
                                       codigo_usuario_fk VARCHAR(7) NOT NULL,
                                       estado_usuario_servicio_fk INT NOT NULL,
-                                      PRIMARY KEY (codigo_servicio_fk, codigo_usuario_fk),
                                       FOREIGN KEY (codigo_servicio_fk) REFERENCES sah.servicio(codigo_servicio),
                                       FOREIGN KEY (codigo_usuario_fk) REFERENCES sah.usuario(codigo_usuario) ON DELETE CASCADE,
                                       FOREIGN KEY (estado_usuario_servicio_fk) REFERENCES sah.estado_usuario_servicio(id_estado_usuario_servicio)
@@ -130,7 +128,6 @@ CREATE TABLE sah.cuarto_servicio (
                                      codigo_cuarto_fk VARCHAR(7) NOT NULL,
                                      codigo_servicio_fk VARCHAR(7) NOT NULL,
                                      estado_cuarto_servicio_fk INT NOT NULL,
-                                     PRIMARY KEY (codigo_cuarto_fk, codigo_servicio_fk),
                                      FOREIGN KEY (codigo_cuarto_fk) REFERENCES sah.cuarto(codigo_cuarto),
                                      FOREIGN KEY (codigo_servicio_fk) REFERENCES sah.servicio(codigo_servicio),
                                      FOREIGN KEY (estado_cuarto_servicio_fk) REFERENCES sah.estado_cuarto_servicio(id_estado_cuarto_servicio)
@@ -173,7 +170,6 @@ CREATE TABLE sah.facturacion (
 CREATE TABLE sah.reserva_cuarto (
                                     codigo_reserva_fk VARCHAR(7) NOT NULL,
                                     codigo_cuarto_fk VARCHAR(7) NOT NULL,
-                                    PRIMARY KEY (codigo_reserva_fk, codigo_cuarto_fk),
                                     FOREIGN KEY (codigo_reserva_fk) REFERENCES sah.reserva(codigo_reserva),
                                     FOREIGN KEY (codigo_cuarto_fk) REFERENCES sah.cuarto(codigo_cuarto)
 );

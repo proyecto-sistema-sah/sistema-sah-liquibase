@@ -40,4 +40,9 @@
         <sqlFile path="classpath:db/changelog/scripts/script-2024-11-16-10-18-am.sql" />
     </changeSet>
 
+    <changeSet id="8" author="Maria Fernanda Valencia">
+        <comment>Se agregan vistas, triggers y procedimientos almacenados</comment>
+        <sqlFile path="classpath:db/changelog/scripts/script-2024-12-11-1-51-pm.sql" />
+    </changeSet>
+
 </databaseChangeLog>

@@ -1,3 +1,5 @@
+--liquibase formatted sql
+
 ALTER TABLE sah.alimento
 ADD COLUMN codigo_imagen varchar(50);
 
@@ -43,3 +45,5 @@ INSERT INTO sah.cuarto_servicio (codigo_cuarto_fk, codigo_servicio_fk, estado_cu
                                                                                                       ('C002', 'S002', 1),
                                                                                                       ('C003', 'S003', 2),
                                                                                                       ('C004', 'S004', 1);
+
+
